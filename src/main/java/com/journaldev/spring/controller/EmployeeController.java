@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.c2t.annotation.basic.Employee;
+import com.c2t.annotation.basic.Employee2;
 import com.c2t.annotation.basic.EmployeeList;
 
 //import com.c2t.journaldev.spring.model.Employee;
@@ -53,6 +54,17 @@ public class EmployeeController {
 	return emp;
    
    }
+	@RequestMapping(value="/rest/emp/insertEmployee",method=RequestMethod.GET)
+	public @ResponseBody Employee2 insertEmployee() 
+	{
+		Session session=sf.openSession();
+		session.beginTransaction();
+		
+		Employee2 emp=new Employee2("rahul","Sangle",new Date(1995/03/06),"983888432");
+		session.save(emp);
+		session.getTransaction().commit();
+		return emp;
+	}
 	
 	@RequestMapping(value="/rest/emp/list",method = RequestMethod.GET)
 	   public @ResponseBody List<Employee> getAllDummyEmployees() {
